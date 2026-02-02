@@ -28,8 +28,6 @@ RUN cat /etc/os-release \
         /tmp/rpms/$([ -d /tmp/rpms/$(uname -m) ] && echo $(uname -m)/)openshift-kube*.rpm \
     && rpm-ostree ex rebuild \
     && rpm-ostree cleanup -m \
-    # Symlink nc to netcat due to known issue in rpm-ostree - https://github.com/coreos/rpm-ostree/issues/1614
-    && ln -s /usr/bin/netcat /usr/bin/nc \
     && rm -rf /go /var/lib/unbound /tmp/rpms \
     && systemctl preset-all \
     && ostree container commit
